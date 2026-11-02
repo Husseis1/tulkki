@@ -1,0 +1,68 @@
+{
+ "overall": {
+  "n": 3000,
+  "intent_acc": 1.0,
+  "slot_f1": 1.0,
+  "exact_match": 1.0
+ },
+ "by_slice": {
+  "asr": {
+   "n": 839,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "colloquial": {
+   "n": 1039,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "standard": {
+   "n": 1122,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  }
+ },
+ "by_intent": {
+  "call": {
+   "n": 471,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "get_weather": {
+   "n": 502,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "navigate": {
+   "n": 531,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "send_message": {
+   "n": 521,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "set_alarm": {
+   "n": 484,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "set_timer": {
+   "n": 491,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  }
+ },
+ "ms_per_utt": 0.020036595333332723,
+ "errors": []
+}

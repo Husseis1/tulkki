@@ -1,0 +1,85 @@
+{"text": "Hei Siri, herätä minut huomenna kuudelta.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "06:00", "day": "tomorrow"}}}
+{"text": "Voisitko asettaa herätyksen puoli seitsemäksi?", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "06:30"}}}
+{"text": "Herätä minut kello 5:15 ylihuomenna.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "05:15", "day": "day_after_tomorrow"}}}
+{"text": "Tarvitsen herätyksen torstaina kahdeksalta.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "08:00", "day": "thursday"}}}
+{"text": "Herätä minut kahtakymmentä yli viisi.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "05:20"}}}
+{"text": "Aseta herätys iltapäivällä kolmelta.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "15:00"}}}
+{"text": "Herätä minut varttia yli kahdeksan huomenna aamulla.", "slice": "standard", "expected": {"name": "set_alarm", "args": {"time": "08:15", "day": "tomorrow"}}}
+{"text": "Hei Siri, herätä mut seiskalt.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "07:00"}}}
+{"text": "Öö laita herätys niinku puol kasilta.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "07:30"}}}
+{"text": "Herätä mut huomenna ennen kahdeksaa, siis seittemält.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "07:00", "day": "tomorrow"}}}
+{"text": "Herätys kakskyt vaille kuus.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "05:40"}}}
+{"text": "Laitatsä herätyksen lauantaiks ysilt.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "09:00", "day": "saturday"}}}
+{"text": "Herätä mut kuudelt aamul.", "slice": "colloquial", "expected": {"name": "set_alarm", "args": {"time": "06:00"}}}
+{"text": "herätä minut kello kuusi nolla viisi", "slice": "asr", "expected": {"name": "set_alarm", "args": {"time": "06:05"}}}
+{"text": "herätys huomenna seitsemän viisitoista", "slice": "asr", "expected": {"name": "set_alarm", "args": {"time": "07:15", "day": "tomorrow"}}}
+{"text": "herätä mut puoli yhdeksältä illalla", "slice": "asr", "expected": {"name": "set_alarm", "args": {"time": "20:30"}}}
+{"text": "aseta herätys kello 06.00", "slice": "asr", "expected": {"name": "set_alarm", "args": {"time": "06:00"}}}
+{"text": "herätä minut kymmenen yli seitsemän", "slice": "asr", "expected": {"name": "set_alarm", "args": {"time": "07:10"}}}
+{"text": "Laita ajastin neljäksi minuutiksi.", "slice": "standard", "expected": {"name": "set_timer", "args": {"seconds": 240}}}
+{"text": "Aseta viidentoista minuutin ajastin.", "slice": "standard", "expected": {"name": "set_timer", "args": {"seconds": 900}}}
+{"text": "Ajastin kaksi tuntia.", "slice": "standard", "expected": {"name": "set_timer", "args": {"seconds": 7200}}}
+{"text": "Muistuta minua kymmenen minuutin päästä ajastimella.", "slice": "standard", "expected": {"name": "set_timer", "args": {"seconds": 600}}}
+{"text": "Käynnistä ajastin, yksi minuutti ja kolmekymmentä sekuntia.", "slice": "standard", "expected": {"name": "set_timer", "args": {"seconds": 90}}}
+{"text": "Laita ajastin kuudeks minuutiks, munat kiehuu.", "slice": "colloquial", "expected": {"name": "set_timer", "args": {"seconds": 360}}}
+{"text": "Ajastin vartti.", "slice": "colloquial", "expected": {"name": "set_timer", "args": {"seconds": 900}}}
+{"text": "Laita semmonen kolmenkymmenen sekunnin ajastin.", "slice": "colloquial", "expected": {"name": "set_timer", "args": {"seconds": 30}}}
+{"text": "Ajastin puoltoist tuntii.", "slice": "colloquial", "expected": {"name": "set_timer", "args": {"seconds": 5400}}}
+{"text": "Laita ajastin yheksäks minuutiks.", "slice": "colloquial", "expected": {"name": "set_timer", "args": {"seconds": 540}}}
+{"text": "ajastin neljä kymmentä minuuttia", "slice": "asr", "expected": {"name": "set_timer", "args": {"seconds": 2400}}}
+{"text": "laita ajastin 90 sekuntia", "slice": "asr", "expected": {"name": "set_timer", "args": {"seconds": 90}}}
+{"text": "ajastin kaksi minuuttia", "slice": "asr", "expected": {"name": "set_timer", "args": {"seconds": 120}}}
+{"text": "Hei Siri, soita Matille.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Matti"}}}
+{"text": "Soittaisitko Kaisalle?", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Kaisa"}}}
+{"text": "Soita isälle kaiuttimella.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "isä"}}}
+{"text": "Aloita puhelu Leenalle.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Leena"}}}
+{"text": "Soita Riikalle.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Riikka"}}}
+{"text": "Soita Mikko Virtaselle.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Mikko Virtanen"}}}
+{"text": "Soita Eetulle.", "slice": "standard", "expected": {"name": "call", "args": {"contact": "Eetu"}}}
+{"text": "Soitas äiskälle.", "slice": "colloquial", "expected": {"name": "call", "args": {"contact": "äiti"}}}
+{"text": "Pirauta Pekal.", "slice": "colloquial", "expected": {"name": "call", "args": {"contact": "Pekka"}}}
+{"text": "Soita Sannal pliis.", "slice": "colloquial", "expected": {"name": "call", "args": {"contact": "Sanna"}}}
+{"text": "Mä haluun soittaa Venlalle.", "slice": "colloquial", "expected": {"name": "call", "args": {"contact": "Venla"}}}
+{"text": "Soita Jarille.", "slice": "colloquial", "expected": {"name": "call", "args": {"contact": "Jari Korhonen"}}}
+{"text": "soita heikille", "slice": "asr", "expected": {"name": "call", "args": {"contact": "Heikki"}}}
+{"text": "soita ainolle", "slice": "asr", "expected": {"name": "call", "args": {"contact": "Aino"}}}
+{"text": "soita henna virtaselle", "slice": "asr", "expected": {"name": "call", "args": {"contact": "Henna Virtanen"}}}
+{"text": "Lähetä Mikolle viesti, että myöhästyn palaverista.", "slice": "standard", "expected": {"name": "send_message", "args": {"contact": "Mikko", "text": "myöhästyn palaverista"}}}
+{"text": "Kirjoita Ainolle, että ruoka on valmis.", "slice": "standard", "expected": {"name": "send_message", "args": {"contact": "Aino", "text": "ruoka on valmis"}}}
+{"text": "Ilmoita Antille, että juna on myöhässä.", "slice": "standard", "expected": {"name": "send_message", "args": {"contact": "Antti", "text": "juna on myöhässä"}}}
+{"text": "Lähetä tekstiviesti Oudille: hyvää yötä.", "slice": "standard", "expected": {"name": "send_message", "args": {"contact": "Outi", "text": "hyvää yötä"}}}
+{"text": "Lähetä Jukalle viesti, että tulen kello kuusi.", "slice": "standard", "expected": {"name": "send_message", "args": {"contact": "Jukka", "text": "tulen kello kuusi"}}}
+{"text": "Laita Sadul viesti et oon tulossa.", "slice": "colloquial", "expected": {"name": "send_message", "args": {"contact": "Satu", "text": "oon tulossa"}}}
+{"text": "Tekstaa mummille et kiitti villasukista.", "slice": "colloquial", "expected": {"name": "send_message", "args": {"contact": "mummo", "text": "kiitti villasukista"}}}
+{"text": "Sano Danielille et peli on huomenna.", "slice": "colloquial", "expected": {"name": "send_message", "args": {"contact": "Daniel", "text": "peli on huomenna"}}}
+{"text": "Kerro Tuomakselle et mä soitan myöhemmin.", "slice": "colloquial", "expected": {"name": "send_message", "args": {"contact": "Tuomas", "text": "mä soitan myöhemmin"}}}
+{"text": "Laita viesti faijalle et auto on pihassa.", "slice": "colloquial", "expected": {"name": "send_message", "args": {"contact": "isä", "text": "auto on pihassa"}}}
+{"text": "lähetä viesti kaisalle olen kaupassa", "slice": "asr", "expected": {"name": "send_message", "args": {"contact": "Kaisa", "text": "olen kaupassa"}}}
+{"text": "lähetä äidille viesti että rakastan sinua", "slice": "asr", "expected": {"name": "send_message", "args": {"contact": "äiti", "text": "rakastan sinua"}}}
+{"text": "Millainen sää on Kotkassa viikonloppuna?", "slice": "standard", "expected": {"name": "get_weather", "args": {"location": "Kotka"}}}
+{"text": "Paljonko on lämpötila Vaasassa?", "slice": "standard", "expected": {"name": "get_weather", "args": {"location": "Vaasa"}}}
+{"text": "Sataako huomenna lunta Kajaanissa?", "slice": "standard", "expected": {"name": "get_weather", "args": {"location": "Kajaani", "day": "tomorrow"}}}
+{"text": "Mikä on sää Porvoossa tiistaina?", "slice": "standard", "expected": {"name": "get_weather", "args": {"location": "Porvoo", "day": "tuesday"}}}
+{"text": "Tarvitsenko tänään sateenvarjoa?", "slice": "standard", "expected": {"name": "get_weather", "args": {"day": "today"}}}
+{"text": "Millainen sää on Savonlinnassa?", "slice": "standard", "expected": {"name": "get_weather", "args": {"location": "Savonlinna"}}}
+{"text": "Onks huomen kylmä Lahdes?", "slice": "colloquial", "expected": {"name": "get_weather", "args": {"location": "Lahti", "day": "tomorrow"}}}
+{"text": "Millane keli Mikkelis?", "slice": "colloquial", "expected": {"name": "get_weather", "args": {"location": "Mikkeli"}}}
+{"text": "Sataaks Jyväskyläs tänää?", "slice": "colloquial", "expected": {"name": "get_weather", "args": {"location": "Jyväskylä", "day": "today"}}}
+{"text": "Paistaaks Hangos aurinko lauantaina?", "slice": "colloquial", "expected": {"name": "get_weather", "args": {"location": "Hanko", "day": "saturday"}}}
+{"text": "Onks Kemis pakkasta?", "slice": "colloquial", "expected": {"name": "get_weather", "args": {"location": "Kemi"}}}
+{"text": "sää salossa huomenna", "slice": "asr", "expected": {"name": "get_weather", "args": {"location": "Salo", "day": "tomorrow"}}}
+{"text": "millainen sää on inarissa", "slice": "asr", "expected": {"name": "get_weather", "args": {"location": "Inari"}}}
+{"text": "sataako keravalla", "slice": "asr", "expected": {"name": "get_weather", "args": {"location": "Kerava"}}}
+{"text": "Navigoi Kuopioon.", "slice": "standard", "expected": {"name": "navigate", "args": {"destination": "Kuopio"}}}
+{"text": "Näytä ajo-ohjeet Rovaniemelle.", "slice": "standard", "expected": {"name": "navigate", "args": {"destination": "Rovaniemi"}}}
+{"text": "Miten pääsen Kallioon julkisilla?", "slice": "standard", "expected": {"name": "navigate", "args": {"destination": "Kallio"}}}
+{"text": "Opasta minut Lappeenrantaan.", "slice": "standard", "expected": {"name": "navigate", "args": {"destination": "Lappeenranta"}}}
+{"text": "Aloita navigointi Vantaalle.", "slice": "standard", "expected": {"name": "navigate", "args": {"destination": "Vantaa"}}}
+{"text": "Vie mut kotiin.", "slice": "colloquial", "expected": {"name": "navigate", "args": {"destination": "koti"}}}
+{"text": "Mennää Pasilaa.", "slice": "colloquial", "expected": {"name": "navigate", "args": {"destination": "Pasila"}}}
+{"text": "Ajetaan Tampereel.", "slice": "colloquial", "expected": {"name": "navigate", "args": {"destination": "Tampere"}}}
+{"text": "Vie mut Otaniemee.", "slice": "colloquial", "expected": {"name": "navigate", "args": {"destination": "Otaniemi"}}}
+{"text": "Reitti Kamppii.", "slice": "colloquial", "expected": {"name": "navigate", "args": {"destination": "Kamppi"}}}
+{"text": "navigoi porvooseen", "slice": "asr", "expected": {"name": "navigate", "args": {"destination": "Porvoo"}}}
+{"text": "näytä reitti kokkolaan", "slice": "asr", "expected": {"name": "navigate", "args": {"destination": "Kokkola"}}}
+{"text": "navigoi hämeenlinnaan", "slice": "asr", "expected": {"name": "navigate", "args": {"destination": "Hämeenlinna"}}}

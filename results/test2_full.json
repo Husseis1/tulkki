@@ -1,0 +1,136 @@
+{
+ "overall": {
+  "n": 68,
+  "intent_acc": 1.0,
+  "slot_f1": 0.9613259668508287,
+  "exact_match": 0.9411764705882353
+ },
+ "by_slice": {
+  "asr": {
+   "n": 13,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "colloquial": {
+   "n": 25,
+   "intent_acc": 1.0,
+   "slot_f1": 0.96875,
+   "exact_match": 0.96
+  },
+  "standard": {
+   "n": 30,
+   "intent_acc": 1.0,
+   "slot_f1": 0.9382716049382716,
+   "exact_match": 0.9
+  }
+ },
+ "by_intent": {
+  "call": {
+   "n": 11,
+   "intent_acc": 1.0,
+   "slot_f1": 0.8181818181818182,
+   "exact_match": 0.8181818181818182
+  },
+  "get_weather": {
+   "n": 12,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "navigate": {
+   "n": 11,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "send_message": {
+   "n": 10,
+   "intent_acc": 1.0,
+   "slot_f1": 0.9500000000000001,
+   "exact_match": 0.9
+  },
+  "set_alarm": {
+   "n": 14,
+   "intent_acc": 1.0,
+   "slot_f1": 0.972972972972973,
+   "exact_match": 0.9285714285714286
+  },
+  "set_timer": {
+   "n": 10,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  }
+ },
+ "ms_per_utt": 0.036473588235206564,
+ "errors": [
+  {
+   "text": "Aseta herätys keskiviikoksi kello kahdeksan.",
+   "slice": "standard",
+   "expected": {
+    "name": "set_alarm",
+    "args": {
+     "time": "08:00",
+     "day": "wednesday"
+    }
+   },
+   "predicted": {
+    "name": "set_alarm",
+    "args": {
+     "time": "08:00"
+    }
+   }
+  },
+  {
+   "text": "Soita Ville Nieminen.",
+   "slice": "standard",
+   "expected": {
+    "name": "call",
+    "args": {
+     "contact": "Ville Nieminen"
+    }
+   },
+   "predicted": {
+    "name": "call",
+    "args": {
+     "contact": "Vi"
+    }
+   }
+  },
+  {
+   "text": "Soita Petelle.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "call",
+    "args": {
+     "contact": "Pete"
+    }
+   },
+   "predicted": {
+    "name": "call",
+    "args": {
+     "contact": "Petti"
+    }
+   }
+  },
+  {
+   "text": "Lähetä Emmalle viesti, että tulen huomenna.",
+   "slice": "standard",
+   "expected": {
+    "name": "send_message",
+    "args": {
+     "contact": "Emma",
+     "text": "tulen huomenna"
+    }
+   },
+   "predicted": {
+    "name": "send_message",
+    "args": {
+     "contact": "Empa",
+     "text": "tulen huomenna"
+    }
+   }
+  }
+ ]
+}

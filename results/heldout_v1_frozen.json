@@ -1,0 +1,228 @@
+{
+ "overall": {
+  "n": 85,
+  "intent_acc": 0.9647058823529412,
+  "slot_f1": 0.9245283018867925,
+  "exact_match": 0.8705882352941177
+ },
+ "by_slice": {
+  "asr": {
+   "n": 19,
+   "intent_acc": 1.0,
+   "slot_f1": 0.9565217391304348,
+   "exact_match": 0.9473684210526315
+  },
+  "colloquial": {
+   "n": 31,
+   "intent_acc": 0.967741935483871,
+   "slot_f1": 0.923076923076923,
+   "exact_match": 0.8387096774193549
+  },
+  "standard": {
+   "n": 35,
+   "intent_acc": 0.9428571428571428,
+   "slot_f1": 0.909090909090909,
+   "exact_match": 0.8571428571428571
+  }
+ },
+ "by_intent": {
+  "call": {
+   "n": 15,
+   "intent_acc": 0.9333333333333333,
+   "slot_f1": 0.8571428571428571,
+   "exact_match": 0.8
+  },
+  "get_weather": {
+   "n": 14,
+   "intent_acc": 1.0,
+   "slot_f1": 1.0,
+   "exact_match": 1.0
+  },
+  "navigate": {
+   "n": 13,
+   "intent_acc": 0.9230769230769231,
+   "slot_f1": 0.8695652173913044,
+   "exact_match": 0.7692307692307693
+  },
+  "send_message": {
+   "n": 12,
+   "intent_acc": 0.9166666666666666,
+   "slot_f1": 0.9333333333333333,
+   "exact_match": 0.8333333333333334
+  },
+  "set_alarm": {
+   "n": 18,
+   "intent_acc": 1.0,
+   "slot_f1": 0.92,
+   "exact_match": 0.8888888888888888
+  },
+  "set_timer": {
+   "n": 13,
+   "intent_acc": 1.0,
+   "slot_f1": 0.9230769230769231,
+   "exact_match": 0.9230769230769231
+  }
+ },
+ "ms_per_utt": 0.023554294117435776,
+ "errors": [
+  {
+   "text": "Herätä mut huomenna ennen kahdeksaa, siis seittemält.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "set_alarm",
+    "args": {
+     "time": "07:00",
+     "day": "tomorrow"
+    }
+   },
+   "predicted": {
+    "name": "set_alarm",
+    "args": {
+     "time": "08:00",
+     "day": "tomorrow"
+    }
+   }
+  },
+  {
+   "text": "herätä minut kello kuusi nolla viisi",
+   "slice": "asr",
+   "expected": {
+    "name": "set_alarm",
+    "args": {
+     "time": "06:05"
+    }
+   },
+   "predicted": {
+    "name": "set_alarm",
+    "args": {
+     "time": "06:00"
+    }
+   }
+  },
+  {
+   "text": "Muistuta minua kymmenen minuutin päästä ajastimella.",
+   "slice": "standard",
+   "expected": {
+    "name": "set_timer",
+    "args": {
+     "seconds": 600
+    }
+   },
+   "predicted": {
+    "name": "set_timer",
+    "args": {
+     "seconds": 660
+    }
+   }
+  },
+  {
+   "text": "Aloita puhelu Leenalle.",
+   "slice": "standard",
+   "expected": {
+    "name": "call",
+    "args": {
+     "contact": "Leena"
+    }
+   },
+   "predicted": null
+  },
+  {
+   "text": "Soita Riikalle.",
+   "slice": "standard",
+   "expected": {
+    "name": "call",
+    "args": {
+     "contact": "Riikka"
+    }
+   },
+   "predicted": {
+    "name": "call",
+    "args": {}
+   }
+  },
+  {
+   "text": "Soita Mikko Virtaselle.",
+   "slice": "standard",
+   "expected": {
+    "name": "call",
+    "args": {
+     "contact": "Mikko Virtanen"
+    }
+   },
+   "predicted": {
+    "name": "call",
+    "args": {
+     "contact": "Mikko"
+    }
+   }
+  },
+  {
+   "text": "Kirjoita Ainolle, että ruoka on valmis.",
+   "slice": "standard",
+   "expected": {
+    "name": "send_message",
+    "args": {
+     "contact": "Aino",
+     "text": "ruoka on valmis"
+    }
+   },
+   "predicted": null
+  },
+  {
+   "text": "Laita Satul viesti et oon tulossa.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "send_message",
+    "args": {
+     "contact": "Satu",
+     "text": "oon tulossa"
+    }
+   },
+   "predicted": {
+    "name": "send_message",
+    "args": {
+     "text": "oon tulossa"
+    }
+   }
+  },
+  {
+   "text": "Vie mut kotiin.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "navigate",
+    "args": {
+     "destination": "koti"
+    }
+   },
+   "predicted": {
+    "name": "navigate",
+    "args": {}
+   }
+  },
+  {
+   "text": "Mennää Pasilaa.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "navigate",
+    "args": {
+     "destination": "Pasila"
+    }
+   },
+   "predicted": null
+  },
+  {
+   "text": "Vie mut Otaniemee.",
+   "slice": "colloquial",
+   "expected": {
+    "name": "navigate",
+    "args": {
+     "destination": "Otaniemi"
+    }
+   },
+   "predicted": {
+    "name": "navigate",
+    "args": {}
+   }
+  }
+ ]
+}
