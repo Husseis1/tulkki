@@ -20,6 +20,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from .morphology import gradate
 from .numbers import find_numbers
 
 __all__ = ["TimeOfDay", "Duration", "parse_time", "parse_duration", "parse_day"]
@@ -28,6 +29,9 @@ _WEEKDAYS = {
     "maanantai": "monday", "tiistai": "tuesday", "keskiviikko": "wednesday",
     "torstai": "thursday", "perjantai": "friday", "lauantai": "saturday", "sunnuntai": "sunday",
 }
+# Weekday names inflect like any noun, including consonant gradation:
+# keskiviikko -> keskiviikolla, keskiviikoksi. Match on both stems.
+_WEEKDAY_STEMS = [(stem, en) for fi, en in _WEEKDAYS.items() for stem in {fi, gradate(fi)}]
 _EVENING = ("illalla", "illal", "illasta", "iltana", "iltapäivällä", "iltapäiväl",
             "iltapäivästä", "ip")
 _MORNING = ("aamulla", "aamul", "aamusta", "aamuna", "aamupäivällä", "aamupäiväl", "ap")
@@ -88,7 +92,7 @@ def parse_day(tokens: list[str]) -> tuple[str | None, str | None, set[int]]:
         elif tok in ("tänään", "tänää", "tänä", "tänäiltana", "tänäaamuna"):
             day = "today"
         else:
-            for fi, en in _WEEKDAYS.items():
+            for fi, en in _WEEKDAY_STEMS:
                 if tok.startswith(fi):
                     day = en
                     break

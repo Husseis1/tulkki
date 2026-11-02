@@ -43,3 +43,12 @@ def test_no_regression(name, minimum):
     p = Parser()
     report = evaluate(lambda t: (c.to_dict() if (c := p.parse(t)) else None), load_jsonl(DATA / name))
     assert report.overall.summary()["exact_match"] >= minimum
+
+
+@pytest.mark.parametrize("word,day", [
+    ("keskiviikoksi", "wednesday"), ("keskiviikolla", "wednesday"), ("keskiviikkona", "wednesday"),
+    ("maanantaiks", "monday"), ("lauantaiaamuna", "saturday"),
+])
+def test_inflected_weekdays(word, day):
+    from tulkki.timeexpr import parse_day
+    assert parse_day([word])[0] == day
