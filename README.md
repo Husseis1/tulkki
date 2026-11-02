@@ -13,7 +13,7 @@ $ tulkki parse "Navigoi Turkuun, ei kun Saloon"
 {"name": "navigate", "args": {"destination": "Salo"}}
 ```
 
-No runtime dependencies, about 0.03 ms per utterance in pure Python, 86 tests.
+No runtime dependencies, about 0.03 ms per utterance in pure Python, 102 tests.
 
 ---
 
@@ -73,11 +73,15 @@ Rule systems overfit easily to the sentences their author has in mind, so develo
 | Colloquial illative | *Vie mut **Otaniemee*** | Colloquial forms extended to every inflection class. |
 | Intent coverage | *Aloita **puhelu***, ***Kirjoita** Ainolle että…*, ***Mennää** Pasilaa* | More keywords. |
 
-**Remaining v2 failures on the fresh test** (4 of 68). These have not been fixed, so the reported number stays honest:
+**v2 failures on the fresh test** (4 of 68). The 94.1% above is the frozen v2 score; these were fixed afterwards in v3:
 
-- *Aseta herätys **keskiviikoksi***: weekday names inflect with gradation too (*keskiviikko* → *keskiviikoksi*), and the day matcher uses prefixes. The fix is to run weekdays through the same paradigm generator as names.
-- *Soita **Petelle*** → `Petti`, and *Lähetä **Emmalle*** → `Empa`: the open-vocabulary ranker always prefers the gradated reading. A production system should rank candidates against the user's actual contact list. Lemma guessing is only the fallback.
-- *Soita **Ville Nieminen*** (an unknown name in the nominative): the ending heuristic takes *-lle* in *Ville* for an allative.
+| Error | Example | v3 fix |
+|---|---|---|
+| Inflected weekday | *Aseta herätys **keskiviikoksi*** | Weekdays are matched on both gradation stems (*keskiviikko-* / *keskiviiko-*). |
+| Wrong gradation guess | *Soita **Petelle*** → `Petti`, *Lähetä **Emmalle*** → `Empa` | Given-name priors when ranking candidates: *-e* names don't gradate, *k/p/t* gradation is common, *mm/nn/ll* reversals are rare in names. |
+| Nominative full name | *Soita **Ville Nieminen*** → `Vi` | A first name followed by a *-nen* surname (nominative or inflected) is read as a full name. |
+
+Because test2 has now been used for error analysis, it no longer measures generalisation. **v3 needs a new test set written by someone else**, and that is the next evaluation step. One known ambiguity remains by design: *Akille* can be *Aki* or *Akki*, and only the user's contact list can resolve it.
 
 ## How it works
 
@@ -125,7 +129,7 @@ The LLM rows are **not** in the tables above, because they were not run for this
 ```bash
 git clone https://github.com/<you>/tulkki && cd tulkki
 pip install -e ".[dev]"
-pytest -q                       # 86 tests
+pytest -q                       # 102 tests
 tulkki parse "sataaks Stadis huomen"
 tulkki inflect Lahti --cls old_i --gradation
 tulkki bench                    # writes results/benchmark.md
