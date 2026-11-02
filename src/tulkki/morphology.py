@@ -235,47 +235,67 @@ _STRENGTHEN = [("ng", "nk"), ("mm", "mp"), ("ll", "lt"), ("nn", "nt"), ("rr", "r
                ("k", "kk"), ("p", "pp"), ("t", "tt"), ("d", "t"), ("v", "p")]
 
 
-def guess_lemmas(form: str) -> list[tuple[str, InflClass, bool]]:
+# Gradation reversals that are common inside Finnish given names (Riikalle -> Riikka,
+# Sadulle -> Satu). The others (mm -> mp, nn -> nt, ...) are real but rare in names,
+# where geminates are usually underlying: Emmalle -> Emma, not *Empa.
+_NAME_GRADATIONS = {"k", "p", "t", "d"}
+
+
+def guess_lemmas(form: str, kind: str | None = None) -> list[tuple[str, InflClass, bool]]:
     """Propose (lemma, class, gradation) analyses of an unknown inflected name.
 
     Analysis by synthesis: strip a candidate ending, undo gradation, guess the
     class, and keep only candidates whose generated paradigm actually contains
-    ``form``. Ranked so that gradating candidates (Riikalle -> Riikka) come
-    first, which matches the frequency of geminate names in Finnish.
+    ``form``. With ``kind="person"`` candidates are re-ranked with priors for
+    given names: -e names do not gradate (Petelle -> Pete), k/p/t gradation is
+    common (Riikalle -> Riikka), other reversals are rare (Emmalle -> Emma),
+    and old i-stems are place-name territory (Lahti), not people.
     """
     form = form.lower()
     seen: set[str] = set()
-    out: list[tuple[str, InflClass, bool]] = []
+    scored: list[tuple[int, int, tuple[str, InflClass, bool]]] = []
     for ending in _ENDINGS:
         if not form.endswith(ending) or len(form) - len(ending) < 2:
             continue
         stem = form[: -len(ending)]
-        candidates: list[tuple[str, InflClass | None, bool]] = []
+        # (lemma, class, gradation, which weak grade was reversed)
+        candidates: list[tuple[str, InflClass | None, bool, str]] = []
         if stem.endswith("kse"):
-            candidates.append((stem[:-3] + "s", InflClass.KSE, False))       # Tuomakse-
+            candidates.append((stem[:-3] + "s", InflClass.KSE, False, ""))       # Tuomakse-
         elif stem.endswith("se"):
-            candidates.append((stem[:-2] + "nen", InflClass.NEN, False))     # Virtase-
+            candidates.append((stem[:-2] + "nen", InflClass.NEN, False, ""))     # Virtase-
         if stem.endswith("ee"):
-            candidates.append((stem[:-1], InflClass.E, False))               # Tamperee-
+            candidates.append((stem[:-1], InflClass.E, False, ""))               # Tamperee-
         elif stem.endswith("e"):
             ebody = stem[:-1]
-            for weak, strong in _STRENGTHEN:                                  # Lahde- -> Lahti
+            for weak, strong in _STRENGTHEN:                                      # Lahde- -> Lahti
                 if ebody.endswith(weak):
-                    candidates.append((ebody[: -len(weak)] + strong + "i", InflClass.OLD_I, True))
+                    candidates.append((ebody[: -len(weak)] + strong + "i", InflClass.OLD_I, True, weak))
                     break
-            candidates.append((ebody + "i", InflClass.OLD_I, False))
+            candidates.append((ebody + "i", InflClass.OLD_I, False, ""))
         body, last = stem[:-1], stem[-1:]
         if last in _VOWELS:
             for weak, strong in _STRENGTHEN:
                 if body.endswith(weak):
-                    candidates.append((body[: -len(weak)] + strong + last, InflClass.VOWEL, True))
+                    candidates.append((body[: -len(weak)] + strong + last, InflClass.VOWEL, True, weak))
                     break
-            candidates.append((stem, InflClass.VOWEL, False))
-        for lemma, cls, grad in candidates:
+            candidates.append((stem, InflClass.VOWEL, False, ""))
+        for lemma, cls, grad, weak in candidates:
             if lemma in seen:
                 continue
             paradigm = {f.lower() for v in ("a", "ä") for f in inflect(lemma, cls, grad, vowel=v).values()}
-            if form in paradigm:
-                seen.add(lemma)
-                out.append((lemma, cls or guess_class(lemma), grad))
-    return out
+            if form not in paradigm:
+                continue
+            seen.add(lemma)
+            score = 0
+            if kind == "person":
+                if cls is InflClass.OLD_I:
+                    score -= 2
+                if cls is InflClass.VOWEL and not grad and lemma.endswith("e"):
+                    score += 2
+                if grad:
+                    score += 1 if weak in _NAME_GRADATIONS else -1
+            elif grad:
+                score += 1
+            scored.append((-score, len(scored), (lemma, cls or guess_class(lemma), grad)))
+    return [item for _, _, item in sorted(scored)]

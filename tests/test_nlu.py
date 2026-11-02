@@ -38,7 +38,7 @@ def test_parse_examples():
     assert p.parse("Soita Riikalle").args == {"contact": "Riikka"}
 
 
-@pytest.mark.parametrize("name,minimum", [("dev.jsonl", 1.0), ("synthetic.jsonl", 1.0), ("test2.jsonl", 0.94)])
+@pytest.mark.parametrize("name,minimum", [("dev.jsonl", 1.0), ("synthetic.jsonl", 1.0), ("heldout.jsonl", 1.0), ("test2.jsonl", 1.0)])
 def test_no_regression(name, minimum):
     p = Parser()
     report = evaluate(lambda t: (c.to_dict() if (c := p.parse(t)) else None), load_jsonl(DATA / name))
@@ -52,3 +52,11 @@ def test_no_regression(name, minimum):
 def test_inflected_weekdays(word, day):
     from tulkki.timeexpr import parse_day
     assert parse_day([word])[0] == day
+
+
+@pytest.mark.parametrize("text,contact", [
+    ("Soita Ville Nieminen", "Ville Nieminen"), ("Soita Ville Niemiselle", "Ville Nieminen"),
+    ("Soita Mikko Virtaselle", "Mikko Virtanen"), ("Soita Petelle", "Pete"),
+])
+def test_unknown_contacts(text, contact):
+    assert Parser().parse(text).args["contact"] == contact

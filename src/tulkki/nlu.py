@@ -99,16 +99,24 @@ class Parser:
             # "Mikko Virtaselle": a known first name in the nominative followed by an
             # inflected surname that is not in the lexicon.
             if end < len(tokens) and tokens[start:end] == [w.lower() for w in name.split()][:end - start]:
-                surname = [g for g in guess_lemmas(tokens[end]) if g[1] is InflClass.NEN]
+                surname = [g for g in guess_lemmas(tokens[end], kind="person") if g[1] is InflClass.NEN]
                 if surname and " " not in name:
                     return start, end + 1, f"{name} {surname[0][0].capitalize()}"
             return hit
-        # Unknown name: analyse the token right after the verb.
+        # Unknown name: analyse the token(s) right after the verb.
         for i, tok in enumerate(tokens[:-1]):
-            if tok.startswith(_CONTACT_VERBS):
-                nxt = tokens[i + 1]
-                if nxt.endswith(("lle", "l")) and (guesses := guess_lemmas(nxt)):
-                    return i + 1, i + 2, guesses[0][0].capitalize()
+            if not tok.startswith(_CONTACT_VERBS):
+                continue
+            first = tokens[i + 1]
+            nxt = tokens[i + 2] if i + 2 < len(tokens) else ""
+            # "Ville Nieminen" / "Ville Niemiselle": first name in the nominative + surname.
+            if nxt.endswith("nen"):
+                return i + 1, i + 3, f"{first.capitalize()} {nxt.capitalize()}"
+            surname = [g for g in guess_lemmas(nxt) if g[1] is InflClass.NEN] if nxt else []
+            if surname:
+                return i + 1, i + 3, f"{first.capitalize()} {surname[0][0].capitalize()}"
+            if first.endswith(("lle", "l")) and (guesses := guess_lemmas(first, kind="person")):
+                return i + 1, i + 2, guesses[0][0].capitalize()
         return None
 
     def _repair(self, tokens: list[str]) -> list[str]:

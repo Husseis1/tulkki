@@ -61,3 +61,11 @@ def test_contact_lookup(form, lemma):
 ])
 def test_guess_lemmas(form, lemma):
     assert guess_lemmas(form)[0][0] == lemma
+
+
+@pytest.mark.parametrize("form,lemma", [
+    ("petelle", "pete"), ("emmalle", "emma"), ("hannalle", "hanna"), ("kallelle", "kalle"),
+    ("riikalle", "riikka"), ("sadulle", "satu"),
+])
+def test_guess_person_names(form, lemma):
+    assert guess_lemmas(form, kind="person")[0][0] == lemma
